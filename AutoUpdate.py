@@ -5,7 +5,12 @@
 #            ╚════════════════════════════════════════════════════════════╝
 
 # This is a Python script for an automatic updating system using a library named AutoUpdate
+
 import urllib.request
+import os
+import shutil
+import time
+import sys
 
 # Default URL for fetching the latest version information
 url = ""
@@ -46,3 +51,45 @@ def is_up_to_date():
 # Function to download and save the updated program to a specified path
 def download(path_to_file):
     urllib.request.urlretrieve(download_link, path_to_file)
+
+# Function to perform full auto-update process
+def update():
+    import git
+
+    cwd = os.getcwd()
+    print(f"Working directory: {cwd}")
+
+    temp_dir = os.path.join(cwd, "temp_repo")
+
+    print("Cloning new version...")
+    if os.path.exists(temp_dir):
+        shutil.rmtree(temp_dir)
+    git.Repo.clone_from(download_link, temp_dir)
+
+    print("Replacing old files...")
+
+    for root, dirs, files in os.walk(temp_dir):
+        relative_path = os.path.relpath(root, temp_dir)
+        for file in files:
+            source_file = os.path.join(root, file)
+            dest_file = os.path.join(cwd, relative_path, file)
+
+            # Create destination directory if not exists
+            os.makedirs(os.path.dirname(dest_file), exist_ok=True)
+
+            # Try to remove old file if exists
+            try:
+                if os.path.exists(dest_file):
+                    os.remove(dest_file)
+                shutil.move(source_file, dest_file)
+            except Exception as e:
+                print(f"Failed to replace {dest_file} - {e}")
+
+    shutil.rmtree(temp_dir)
+    print("Update complete! Please restart the program.")
+
+    # Optional: Restart the program automatically
+    time.sleep(2)
+    print("Restarting...")
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
