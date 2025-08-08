@@ -1,4 +1,4 @@
-# AutoUpdate
+# AutoUpgrader
 PYPI PROJECT
 A Python package to automatically find software updates of your repositories in GitHub
 
@@ -30,17 +30,17 @@ Right click on the raw option and copy the link
 
 Usage example:
 ```py
-from autoupdate import *
+import autoupgrader
 
-autoupdate.set_url("https://raw.githubusercontent.com/Pytholearn/Proxy-Checker-2/refs/heads/main/version")
-autoupdate.set_current_version("1.8.9")
-autoupdate.set_download_link("https://github.com/Pytholearn/Proxy-Checker-2.git")
+autoupgrader.set_url("https://raw.githubusercontent.com/Pytholearn/Proxy-Checker-2/refs/heads/main/version")
+autoupgrader.set_current_version("1.8.9")
+autoupgrader.set_download_link("https://github.com/Pytholearn/Proxy-Checker-2.git")
 
-if not autoupdate.is_up_to_date():
+if not autoupgrader.is_up_to_date():
     print("Would you like to update your tool?")
     choice = input("Enter (y/n): ")
     if choice == "y":
-       autoupdate.update()
+       autoupgrader.update()
     else:
         pass
 
