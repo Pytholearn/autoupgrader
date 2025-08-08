@@ -30,56 +30,19 @@ Right click on the raw option and copy the link
 
 Usage example:
 ```py
-import AutoUpdate #import pack
-import os
-import git
-import shutil
-import time
+from autoupdate import *
 
-cwd = os.getcwd()
-print(cwd)
+autoupdate.set_url("https://raw.githubusercontent.com/Pytholearn/Proxy-Checker-2/refs/heads/main/version")
+autoupdate.set_current_version("1.8.9")
+autoupdate.set_download_link("https://github.com/Pytholearn/Proxy-Checker-2.git")
 
-AutoUpdate.set_url("https://raw.githubusercontent.com/Pytholearn/HAZARD-CHAMELEONS/main/version") # Raw Code
-download_link = "https://github.com/Pytholearn/HAZARD-CHAMELEONS.git" #Git Download Link
-AutoUpdate.set_current_version("1.1.2")
-
-if not AutoUpdate.is_up_to_date():
-    print("New UPDATE!")
-
+if not autoupdate.is_up_to_date():
     print("Would you like to update your tool?")
-    choice = input("If you like(Y) or you dont want to update (N)[>>>] ")
-    if choice == "Y" or choice == "y":
-    
-        
-        local_repo_path = os.path.join(cwd, "temp_repo")
-        if not os.path.exists(local_repo_path):
-            os.makedirs(local_repo_path)
-        git.Repo.clone_from(download_link, local_repo_path)
-        
-        
-        for root, dirs, files in os.walk(local_repo_path):
-            relative_path = os.path.relpath(root, local_repo_path)
-            for file in files:
-                source_file_path = os.path.join(root, file)
-                dest_file_path = os.path.join(cwd, relative_path, file)
-                if os.path.exists(dest_file_path):
-                    os.remove(dest_file_path)  
-                shutil.move(source_file_path, dest_file_path)  
-            for dir in dirs:
-                source_dir_path = os.path.join(root, dir)
-                dest_dir_path = os.path.join(cwd, relative_path, dir)
-                if not os.path.exists(dest_dir_path):
-                    shutil.move(source_dir_path, dest_dir_path) 
-        
-        
-        shutil.rmtree(local_repo_path)
-        print("Update Complete!")
-        time.sleep(2)
-    elif choice == "n" or choice == "N":
+    choice = input("Enter (y/n): ")
+    if choice == "y":
+       autoupdate.update()
+    else:
         pass
-else:
-    print("Update Not Found!")
-    time.sleep(2)
 
 ```
 
