@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='autoupgrader',
-    version='0.1.0',
+    version='0.1.1',
     author='HaZaRd',
     author_email='police123456789ilia@gmail.com',
     description='A library for automatic Python updates',
@@ -20,3 +20,4 @@ setup(
     ],
     python_requires='>=3.6',
 )
+
