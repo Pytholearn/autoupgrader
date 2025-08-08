@@ -4,7 +4,7 @@
 #            ║        Discord: https://discord.gg/YU7jYRkxwp              ║
 #            ╚════════════════════════════════════════════════════════════╝
 
-# This is a Python script for an automatic updating system using a library named AutoUpdate
+# This is a Python script for an automatic updating system using a library named autoupgrader
 
 import urllib.request
 import os
