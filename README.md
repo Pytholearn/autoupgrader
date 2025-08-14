@@ -46,6 +46,8 @@ if not autoupgrader.is_up_to_date():
 
 ```
 
+https://www.youtube.com/watch?v=x70NvAAqxaU
+
 ## FAQ
 
 #### For Help: https://discord.gg/qD8SXrRJbw
